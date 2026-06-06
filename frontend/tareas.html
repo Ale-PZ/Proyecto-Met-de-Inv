@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="style.css">
+
+    <title>Tareas</title>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="barranav" style="background-color: #d75674;">
+
+        <a class="nombreapp" href="index.html">
+            TareasName
+        </a>
+
+        <a class="navlink" href="index.html">
+            Inicio
+        </a>
+
+        <a class="navlink" href="tareas.html">
+            Tareas
+        </a>
+
+        <a class="navlink" href="materias.html">
+            Materias
+        </a>
+
+    </nav>
+
+    <!-- TITULO -->
+    <h1>Mis Tareas</h1>
+
+    <!-- FORMULARIO -->
+    <div class="form-container">
+
+        <h2>Nueva tarea</h2>
+
+        <form>
+
+            <label>Nombre de la tarea</label>
+            <input type="text" placeholder="Ingrese el nombre">
+
+            <label>Descripción</label>
+            <textarea placeholder="Ingrese una descripción"></textarea>
+
+            <label>Materia</label>
+            <input type="text" placeholder="Ingrese la materia">
+
+            <label>Fecha de entrega</label>
+            <input type="date">
+
+            <label>Estado</label>
+
+            <select>
+                <option>Activa</option>
+                <option>Terminada</option>
+                <option>Atrasada</option>
+            </select>
+
+            <button type="submit">
+                Guardar tarea
+            </button>
+
+        </form>
+
+    </div>
+
+    <!-- LISTA DE TAREAS -->
+    <div class="tareas-container">
+
+        <h2>Lista de tareas</h2>
+
+        <!-- TAREA -->
+        <div class="tarea-card">
+
+            <div>
+                <h3>Proyecto Base de Datos</h3>
+
+                <p>
+                    Entregar documentación final del proyecto.
+                </p>
+
+                <span class="estado activa">
+                    Activa
+                </span>
+            </div>
+
+            <div class="acciones">
+
+                <button class="editar">
+                    Editar
+                </button>
+
+                <button class="eliminar">
+                    Eliminar
+                </button>
+
+            </div>
+
+        </div>
+
+        <!-- TAREA -->
+        <div class="tarea-card">
+
+            <div>
+                <h3>Investigación UML</h3>
+
+                <p>
+                    Realizar diagramas de clases y secuencia.
+                </p>
+
+                <span class="estado atrasada">
+                    Atrasada
+                </span>
+            </div>
+
+            <div class="acciones">
+
+                <button class="editar">
+                    Editar
+                </button>
+
+                <button class="eliminar">
+                    Eliminar
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist
+</body>
+</html>

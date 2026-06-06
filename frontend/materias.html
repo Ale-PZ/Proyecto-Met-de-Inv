@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="style.css">
+
+    <title>Materias</title>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="barranav" style="background-color: #d75674;">
+
+        <a class="nombreapp" href="index.html">
+            TareasName
+        </a>
+
+        <a class="navlink" href="index.html">
+            Inicio
+        </a>
+
+        <a class="navlink" href="tareas.html">
+            Tareas
+        </a>
+
+        <a class="navlink" href="materias.html">
+            Materias
+        </a>
+
+    </nav>
+
+    <!-- TITULO -->
+    <h1>Mis Materias</h1>
+
+    <!-- FORMULARIO -->
+    <div class="form-container">
+
+        <h2>Nueva materia</h2>
+
+        <form>
+
+            <label>Nombre de la materia</label>
+            <input type="text" placeholder="Ingrese el nombre de la materia">
+
+            <label>Profesor</label>
+            <input type="text" placeholder="Ingrese el nombre del profesor">
+
+            <label>Horario</label>
+            <input type="text" placeholder="Ejemplo: Lunes y Miércoles 8:00 AM">
+
+            <button type="submit">
+                Guardar materia
+            </button>
+
+        </form>
+
+    </div>
+
+    <!-- LISTA DE MATERIAS -->
+    <div class="materias-container">
+
+        <h2>Lista de materias</h2>
+
+        <!-- MATERIA -->
+        <div class="materia-card">
+
+            <div>
+
+                <h3>Base de Datos</h3>
+
+                <p>
+                    Profesor: Juan Pérez
+                </p>
+
+                <p>
+                    Horario: Martes y Jueves 10:00 AM
+                </p>
+
+            </div>
+
+            <div class="acciones">
+
+                <button class="editar">
+                    Editar
+                </button>
+
+                <button class="eliminar">
+                    Eliminar
+                </button>
+
+            </div>
+
+        </div>
+
+        <!-- MATERIA -->
+        <div class="materia-card">
+
+            <div>
+
+                <h3>Programación Web</h3>
+
+                <p>
+                    Profesor: María López
+                </p>
+
+                <p>
+                    Horario: Viernes 2:00 PM
+                </p>
+
+            </div>
+
+            <div class="acciones">
+
+                <button class="editar">
+                    Editar
+                </button>
+
+                <button class="eliminar">
+                    Eliminar
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+</body>
+</html>
