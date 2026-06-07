@@ -38,35 +38,38 @@ const tareas = [
 ];
 
 
-/*AGREGAR TAREA*/
+/*AGREGAR TAREA CONECTADO YA CON BASE*/
+const formMateria = document.getElementById("formMateria");
 
-const formularioTarea = document.querySelector("form");
-
-if(formularioTarea){
-
-    formularioTarea.addEventListener("submit", function(event){
-
+if (formMateria) {
+    formMateria.addEventListener("submit", function(event) {
         event.preventDefault();
 
-        const inputs = formularioTarea.querySelectorAll("input, textarea, select");
+        const boton = formMateria.querySelector("button[type='submit']");
+        boton.disabled = true;
 
-        const nuevaTarea = {
-            nombre: inputs[0].value,
-            descripcion: inputs[1].value,
-            materia: inputs[2].value,
-            fecha: inputs[3].value,
-            estado: inputs[4].value
-        };
+        const datos = new FormData(formMateria);
 
-        console.log("Nueva tarea:");
-        console.log(nuevaTarea);
+        fetch("backend/registrar_materia.php", {
+            method: "POST",
+            body: datos
+        })
+        .then(response => response.json())
+        .then(data => {
+            alert(data.mensaje);
 
-        alert("Tarea guardada correctamente");
-
-        formularioTarea.reset();
-
+            if (data.status === "success") {
+                formMateria.reset();
+            }
+        })
+        .catch(error => {
+            console.error("Error:", error);
+            alert("Ocurrió un error al registrar la materia");
+        })
+        .finally(() => {
+            boton.disabled = false;
+        });
     });
-
 }
 
 
