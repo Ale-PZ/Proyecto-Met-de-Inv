@@ -57,41 +57,6 @@ if (formMateria) {
 }
 
 
-/*BOTONES EDITAR*/
-
-const botonesEditar = document.querySelectorAll(".editar");
-
-botonesEditar.forEach(function(boton){
-
-    boton.addEventListener("click", function(){
-
-        alert("Función editar tarea");
-
-    });
-
-});
-
-
-/*BOTONES ELIMINAR*/
-
-const botonesEliminar = document.querySelectorAll(".eliminar");
-
-botonesEliminar.forEach(function(boton){
-
-    boton.addEventListener("click", function(){
-
-        const confirmar = confirm("¿Deseas eliminar esta tarea?");
-
-        if(confirmar){
-
-            boton.parentElement.parentElement.remove();
-
-        }
-
-    });
-
-});
-
 
 /* LISTAR MATERIAS DESDE LA BASE DE DATOS */
 
@@ -247,7 +212,7 @@ function cargarTareas() {
 
                             <div class="acciones">
                                 <button class="editar">Editar</button>
-                                <button class="eliminar">Eliminar</button>
+                                <button class="eliminar" onclick="eliminarTarea(${tarea.id_tarea})">Eliminar</button>
                             </div>
                         </div>
                     `;
@@ -264,3 +229,33 @@ function cargarTareas() {
 }
 
 cargarTareas();
+
+/* ELIMINAR TAREA */
+
+function eliminarTarea(id_tarea) {
+    const confirmar = confirm("¿Deseas eliminar esta tarea?");
+
+    if (!confirmar) {
+        return;
+    }
+
+    const datos = new FormData();
+    datos.append("id_tarea", id_tarea);
+
+    fetch("backend/eliminar_tarea.php", {
+        method: "POST",
+        body: datos
+    })
+    .then(response => response.json())
+    .then(data => {
+        alert(data.mensaje);
+
+        if (data.status === "success") {
+            cargarTareas();
+        }
+    })
+    .catch(error => {
+        console.error("Error:", error);
+        alert("Ocurrió un error al eliminar la tarea");
+    });
+}
