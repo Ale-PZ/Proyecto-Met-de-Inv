@@ -89,7 +89,11 @@ function cargarMaterias() {
                             </div>
 
                             <div class="acciones">
-                                <button class="editar">Editar</button>
+                                <button class="editar" onclick="editarMateria(
+                                ${materia.id_materia},
+                                '${materia.nombre_materia}',
+                                '${materia.profesor}',
+                                '${materia.grupo}')">Editar</button>
                                 <button class="eliminar" onclick="eliminarMateria(${materia.id_materia})">Eliminar</button>
                             </div>
                         </div>
@@ -287,5 +291,45 @@ function eliminarMateria(id_materia) {
     .catch(error => {
         console.error("Error:", error);
         alert("Ocurrió un error al eliminar la materia");
+    });
+}
+
+/* EDITAR MATERIA */
+
+function editarMateria(id_materia, nombreActual, profesorActual, grupoActual) {
+    const nuevoNombre = prompt("Nuevo nombre de la materia:", nombreActual);
+    const nuevoProfesor = prompt("Nuevo nombre del profesor:", profesorActual);
+    const nuevoGrupo = prompt("Nuevo grupo:", grupoActual);
+
+    if (nuevoNombre === null || nuevoProfesor === null || nuevoGrupo === null) {
+        return;
+    }
+
+    if (nuevoNombre.trim() === "" || nuevoProfesor.trim() === "" || nuevoGrupo.trim() === "") {
+        alert("Todos los campos son obligatorios");
+        return;
+    }
+
+    const datos = new FormData();
+    datos.append("id_materia", id_materia);
+    datos.append("nombre_materia", nuevoNombre);
+    datos.append("profesor", nuevoProfesor);
+    datos.append("grupo", nuevoGrupo);
+
+    fetch("backend/editar_materia.php", {
+        method: "POST",
+        body: datos
+    })
+    .then(response => response.json())
+    .then(data => {
+        alert(data.mensaje);
+
+        if (data.status === "success") {
+            cargarMaterias();
+        }
+    })
+    .catch(error => {
+        console.error("Error:", error);
+        alert("Ocurrió un error al editar la materia");
     });
 }
