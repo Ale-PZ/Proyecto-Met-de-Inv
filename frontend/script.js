@@ -90,7 +90,7 @@ function cargarMaterias() {
 
                             <div class="acciones">
                                 <button class="editar">Editar</button>
-                                <button class="eliminar">Eliminar</button>
+                                <button class="eliminar" onclick="eliminarMateria(${materia.id_materia})">Eliminar</button>
                             </div>
                         </div>
                     `;
@@ -257,5 +257,35 @@ function eliminarTarea(id_tarea) {
     .catch(error => {
         console.error("Error:", error);
         alert("Ocurrió un error al eliminar la tarea");
+    });
+}
+
+/* ELIMINAR MATERIA */
+
+function eliminarMateria(id_materia) {
+    const confirmar = confirm("¿Deseas eliminar esta materia?");
+
+    if (!confirmar) {
+        return;
+    }
+
+    const datos = new FormData();
+    datos.append("id_materia", id_materia);
+
+    fetch("backend/eliminar_materia.php", {
+        method: "POST",
+        body: datos
+    })
+    .then(response => response.json())
+    .then(data => {
+        alert(data.mensaje);
+
+        if (data.status === "success") {
+            cargarMaterias();
+        }
+    })
+    .catch(error => {
+        console.error("Error:", error);
+        alert("Ocurrió un error al eliminar la materia");
     });
 }
