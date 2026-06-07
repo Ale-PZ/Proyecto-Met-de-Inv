@@ -21,7 +21,7 @@ if(atrasadas){
 }
 
 
-/*AGREGAR TAREA CONECTADO YA CON BASE*/
+/*AGREGAR MATERIA CONECTADO YA CON BASE*/
 const formMateria = document.getElementById("formMateria");
 
 if (formMateria) {
@@ -93,19 +93,6 @@ botonesEliminar.forEach(function(boton){
 });
 
 
-/*PROXIMAS TAREAS*/
-
-const tarea1 = document.getElementById("Tarea1");
-const tarea2 = document.getElementById("Tarea2");
-
-if(tarea1){
-    tarea1.textContent = "Proyecto Final - 10 Junio";
-}
-
-if(tarea2){
-    tarea2.textContent = "Investigación UML - 12 Junio";
-}
-
 /* LISTAR MATERIAS DESDE LA BASE DE DATOS */
 
 function cargarMaterias() {
@@ -155,3 +142,125 @@ function cargarMaterias() {
 }
 
 cargarMaterias();
+
+/* CARGAR MATERIAS EN EL SELECT DE TAREAS */
+
+function cargarMateriasEnSelect() {
+    const selectMaterias = document.getElementById("selectMaterias");
+
+    if (!selectMaterias) {
+        return;
+    }
+
+    fetch("backend/listar_materias.php")
+        .then(response => response.json())
+        .then(data => {
+            selectMaterias.innerHTML = '<option value="">Seleccione una materia</option>';
+
+            if (data.status === "success") {
+                data.materias.forEach(materia => {
+                    selectMaterias.innerHTML += `
+                        <option value="${materia.id_materia}">
+                            ${materia.nombre_materia}
+                        </option>
+                    `;
+                });
+            }
+        })
+        .catch(error => {
+            console.error("Error al cargar materias:", error);
+        });
+}
+
+cargarMateriasEnSelect();
+
+
+/* REGISTRAR TAREA EN BASE DE DATOS */
+
+const formTarea = document.getElementById("formTarea");
+
+if (formTarea) {
+    formTarea.addEventListener("submit", function(event) {
+        event.preventDefault();
+
+        const boton = formTarea.querySelector("button[type='submit']");
+        boton.disabled = true;
+
+        const datos = new FormData(formTarea);
+
+        fetch("backend/registrar_tarea.php", {
+            method: "POST",
+            body: datos
+        })
+        .then(response => response.json())
+        .then(data => {
+            alert(data.mensaje);
+
+            if (data.status === "success") {
+                formTarea.reset();
+                cargarTareas();
+                cargarMateriasEnSelect();
+            }
+        })
+        .catch(error => {
+            console.error("Error:", error);
+            alert("Ocurrió un error al registrar la tarea");
+        })
+        .finally(() => {
+            boton.disabled = false;
+        });
+    });
+}
+
+
+/* LISTAR TAREAS DESDE LA BASE DE DATOS */
+
+function cargarTareas() {
+    const listaTareas = document.getElementById("listaTareas");
+
+    if (!listaTareas) {
+        return;
+    }
+
+    fetch("backend/listar_tareas.php")
+        .then(response => response.json())
+        .then(data => {
+            listaTareas.innerHTML = "";
+
+            if (data.status === "success") {
+
+                if (data.tareas.length === 0) {
+                    listaTareas.innerHTML = "<p>No hay tareas registradas.</p>";
+                    return;
+                }
+
+                data.tareas.forEach(tarea => {
+                    listaTareas.innerHTML += `
+                        <div class="tarea-card">
+                            <div>
+                                <h3>${tarea.titulo}</h3>
+                                <p>${tarea.descripcion}</p>
+                                <p>Materia: ${tarea.nombre_materia}</p>
+                                <p>Fecha de entrega: ${tarea.fecha_entrega}</p>
+                                <span class="estado">${tarea.estado}</span>
+                            </div>
+
+                            <div class="acciones">
+                                <button class="editar">Editar</button>
+                                <button class="eliminar">Eliminar</button>
+                            </div>
+                        </div>
+                    `;
+                });
+
+            } else {
+                listaTareas.innerHTML = `<p>${data.mensaje}</p>`;
+            }
+        })
+        .catch(error => {
+            console.error("Error:", error);
+            listaTareas.innerHTML = "<p>Ocurrió un error al cargar las tareas.</p>";
+        });
+}
+
+cargarTareas();
