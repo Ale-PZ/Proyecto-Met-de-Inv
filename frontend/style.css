@@ -1,60 +1,389 @@
-
-body{
-    background-color: #fde9eb;
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
-nav a:hover{
-    background-color: #3451c7;
+
+:root {
+    --color-principal: #d75674;
+    --color-principal-oscuro: #b83f5d;
+    --color-secundario: #DDDD7B;
+    --color-fondo: #fde9eb;
+    --color-texto: #2f2f3a;
+    --color-suave: #fff7f8;
+    --color-blanco: #ffffff;
+    --color-borde: #f1c5cf;
+    --sombra: 0 12px 30px rgba(215, 86, 116, 0.18);
+}
+body{
+    min-height: 100vh;
+    font-family: Arial, Helvetica, sans-serif;
+    color: var(--color-texto);
+    padding-bottom: 40px;
+    background:
+       linear-gradient(135deg, #fde9eb 0%, #fff7f8 50%, #f8d9df 100%);
+}
+
+/*BARRA NAVEGACION */
+nav a:hover, .barranav a:hover, nav .navlink:hover{
+    background-color: rgba(255, 255, 255, 0.22);
+    transform: translateY(-2px);
 }
 
 /* CONTENEDOR DE CARDS */
 .cards-container{
-    display: flex;
-    gap: 20px;
-    margin-bottom: 30px;
+   grid-template-columns: 1fr;
 }
 
 /* CARDS */
 .divcss{
-    flex: 1;
-    background-color: #DDDD7B;
-    padding: 25px;
-    border-radius: 12px;
-    box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+    min-height: 150px;
+    background: var(--color-blanco);
+    padding: 28px;
+    border-radius: 24px;
+    box-shadow: var(--sombra);
     text-align: center;
+    border: 1px solid rgba(215, 86, 116, 0.12);
+    transition: 0.25s ease;
+    position: relative;
+    overflow: hidden;
+}
+.divcss::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 8px;
+    background: linear-gradient(90deg, var(--color-principal), var(--color-secundario));
+}
+
+.divcss:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 18px 35px rgba(215, 86, 116, 0.25);
+}
+
+.divcss p {
+    display: block;
+    margin-top: 8px;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--color-texto);
+}
+
+.divcss p:last-child {
+    font-size: 46px;
+    color: var(--color-principal);
+    font-weight: 900;
+}
+.proximasTareas {
+    width: min(1100px, 92%);
+    margin: 0 auto;
+    background: var(--color-blanco);
+    padding: 30px;
+    border-radius: 24px;
+    box-shadow: var(--sombra);
+    border-left: 8px solid var(--color-principal);
+    transition: 0.25s ease;
+}
+
+.proximasTareas:hover {
+    transform: translateY(-4px);
+}
+
+.proximasTareas p {
+    background: var(--color-suave);
+    padding: 14px 16px;
+    border-radius: 14px;
+    margin-top: 10px;
+    color: var(--color-texto);
+    border: 1px solid var(--color-borde);
 }
 
 a {
+    color: inherit;
     text-decoration: none;
 
 }
 
-.divcss p{
-    margin-top: 15px;
-    font-size: 30px;
-    font-weight: bold;
-    color: #d75674;
-    display: inline;
+.nombreapp{
+    margin-right: auto;
+    font-weight: 800;
+    letter-spacing: 0.3px;
 }
 
-nav{
+nav, .barranav{
+    width: min(1100px, 100%);
     display: flex;
-    gap: 10px;
-    margin-bottom: 30px;
-    justify-content: flex-start;
+    gap: 12px;
+    margin: 0px auto 35px auto;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 18px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, var(--color-principal), var(--color-principal-oscuro)) !important;
+    box-shadow: var(--sombra);
 }
 
-nav a{
+nav a, .barranav a{
     text-decoration: none;
     color: white;
     padding: 10px 18px;
-    border-radius: 8px;
+    border-radius: 12px;
+    font-weight: 600;
     transition: 0.3s;
 }
-nav .navlink:hover{
+.navlink{
+    color: rgba(255,255,255,0.88);
+    font-weight: 600;
+    padding: 10px 16px;
+    border-radius: 999px;
+    transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease;
+}
+.navlink:hover, .navlink.active{
     background-color: #DDDD7B;
+    
 }
 
+
 .nombreapp:hover {
-    background: none;
-    color: inherit;
+    background: transparent;
+    color: white;
+    transform: none;
+}
+h1{
+    width: min(1100px, 92%);
+    margin: 0 auto 25px auto;
+    font-size: clamp(30px, 5vw, 48px);
+    color: var(--color-principal-oscuro);
+    font-weight: 800;
+    text-align: center;
+}
+h2{
+    color: var(--color-principal-oscuro);
+    margin-bottom: 18px;
+    font-size: 24px;
+}
+h3{
+    color: var(--color-principal-oscuro);
+    margin-bottom: 8px;
+    font-size: 21px;
+}
+p{
+    line-height: 1.5;
+}
+form{
+    display: flex;
+    gap: 14px;
+    flex-direction: column;
+}
+label{
+    font-weight: 700;
+    color: var(--color-principal-oscuro);
+    margin-top: 4px;
+}
+input,
+textarea,
+select{
+    width: 100%;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 13px 15px;
+    font-size: 15px;
+    color: var(--color-texto);
+    background: #fffafa;
+    outline: none;
+    transition: 0.25s ease;
+}
+textarea{
+    min-height: 110px;
+    resize: vertical;
+}
+
+input:focus,
+textarea:focus,
+select:focus{
+    border-color: var(--color-principal);
+    background: white;
+    box-shadow: 0 0 0 4px rgba(215, 86, 116, 0.12);
+}
+
+button {
+    border: none;
+    border-radius: 14px;
+    padding: 13px 18px;
+    font-size: 15px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: 0.25s ease;
+}
+form button [type="submit"]{
+    margin-top: 10px;
+    background: linear-gradient(135deg, var(--color-principal), var(--color-principal-oscuro));
+    color: white;
+    box-shadow: 0 10px 22px rgba(215, 86, 116, 0.28);
+
+}
+form button[type="submit"]:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 26px rgba(215, 86, 116, 0.35);
+}
+button:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+#listaTareas,
+#listaMaterias{
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+.tarea-card,
+.materia-card {
+    background: #fffafa;
+    border: 1px solid var(--color-borde);
+    border-radius: 20px;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 18px;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.05);
+    transition: 0.25s ease;
+}
+
+.tarea-card:hover,
+.materia-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 26px rgba(215, 86, 116, 0.18);
+}
+
+.tarea-card p,
+.materia-card p {
+    margin: 5px 0;
+    color: #555565;
+}
+
+.estado {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 7px 12px;
+    border-radius: 999px;
+    background: var(--color-secundario);
+    color: #606020;
+    font-weight: 800;
+    font-size: 13px;
+}
+
+.acciones {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: flex-end;
+}
+
+.editar {
+    background: #3451c7;
+    color: white;
+}
+
+.editar:hover {
+    background: #263fa5;
+    transform: translateY(-2px);
+}
+
+.eliminar {
+    background: var(--color-principal);
+    color: white;
+}
+
+.eliminar:hover {
+    background: var(--color-principal-oscuro);
+    transform: translateY(-2px);
+}
+#listaTareas > p,
+#listaMaterias > p {
+    background: var(--color-suave);
+    border: 1px dashed var(--color-borde);
+    padding: 18px;
+    border-radius: 16px;
+    text-align: center;
+    color: #777;
+    font-weight: 600;
+}
+
+
+/*PANEL PRINCIPAL*/
+.cards-container{
+    width: min(1100px, 92%);
+    margin: 0 auto 28px auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+}
+/*FORMULARIO*/
+.form-container,
+.tareas-container,
+.materias-container {
+    width: min(900px, 92%);
+    margin: 0 auto 28px auto;
+    background: rgba(255, 255, 255, 0.92);
+    padding: 30px;
+    border-radius: 24px;
+    box-shadow: var(--sombra);
+    border: 1px solid rgba(215, 86, 116, 0.12);
+}
+
+@media (max-width: 768px) {
+    nav,
+    .barranav {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .nombreapp {
+        width: 100%;
+        margin-right: 0;
+        text-align: center;
+        font-size: 22px;
+    }
+
+    .cards-container {
+        grid-template-columns: 1fr;
+    }
+
+    .tarea-card,
+    .materia-card {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .acciones {
+        width: 100%;
+        justify-content: flex-start;
+    }
+
+    .acciones button {
+        flex: 1;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 30px;
+    }
+
+    .form-container,
+    .tareas-container,
+    .materias-container,
+    .proximasTareas,
+    .divcss {
+        padding: 22px;
+    }
+
+    nav a,
+    .barranav a {
+        padding: 9px 12px;
+        font-size: 14px;
+    }
 }
