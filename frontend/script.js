@@ -21,23 +21,6 @@ if(atrasadas){
 }
 
 
-/* LISTA DE TAREAS */
-
-const tareas = [
-    {
-        nombre: "Proyecto Base de Datos",
-        descripcion: "Entregar documentación final",
-        estado: "Activa"
-    },
-
-    {
-        nombre: "Investigación UML",
-        descripcion: "Realizar diagramas",
-        estado: "Atrasada"
-    }
-];
-
-
 /*AGREGAR TAREA CONECTADO YA CON BASE*/
 const formMateria = document.getElementById("formMateria");
 
@@ -60,6 +43,7 @@ if (formMateria) {
 
             if (data.status === "success") {
                 formMateria.reset();
+                cargarMaterias();
             }
         })
         .catch(error => {
@@ -121,3 +105,53 @@ if(tarea1){
 if(tarea2){
     tarea2.textContent = "Investigación UML - 12 Junio";
 }
+
+/* LISTAR MATERIAS DESDE LA BASE DE DATOS */
+
+function cargarMaterias() {
+    const listaMaterias = document.getElementById("listaMaterias");
+
+    if (!listaMaterias) {
+        return;
+    }
+
+    fetch("backend/listar_materias.php")
+        .then(response => response.json())
+        .then(data => {
+            listaMaterias.innerHTML = "";
+
+            if (data.status === "success") {
+
+                if (data.materias.length === 0) {
+                    listaMaterias.innerHTML = "<p>No hay materias registradas.</p>";
+                    return;
+                }
+
+                data.materias.forEach(materia => {
+                    listaMaterias.innerHTML += `
+                        <div class="materia-card">
+                            <div>
+                                <h3>${materia.nombre_materia}</h3>
+                                <p>Profesor: ${materia.profesor}</p>
+                                <p>Grupo: ${materia.grupo}</p>
+                            </div>
+
+                            <div class="acciones">
+                                <button class="editar">Editar</button>
+                                <button class="eliminar">Eliminar</button>
+                            </div>
+                        </div>
+                    `;
+                });
+
+            } else {
+                listaMaterias.innerHTML = `<p>${data.mensaje}</p>`;
+            }
+        })
+        .catch(error => {
+            console.error("Error:", error);
+            listaMaterias.innerHTML = "<p>Ocurrió un error al cargar las materias.</p>";
+        });
+}
+
+cargarMaterias();
