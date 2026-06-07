@@ -15,7 +15,7 @@
     <nav class="barranav" style="background-color: #d75674;">
 
         <a class="nombreapp" href="index.html">
-            TareasName
+            Tareas Escolares
         </a>
 
         <a class="navlink" href="index.html">
@@ -40,16 +40,16 @@
 
         <h2>Nueva materia</h2>
 
-        <form>
+        <form id="formMateria">
 
             <label>Nombre de la materia</label>
-            <input type="text" placeholder="Ingrese el nombre de la materia">
+            <input type="text" name="nombre_materia" placeholder="Ingrese el nombre de la materia">
 
             <label>Profesor</label>
-            <input type="text" placeholder="Ingrese el nombre del profesor">
+            <input type="text" name="profesor" placeholder="Ingrese el nombre del profesor">
 
-            <label>Horario</label>
-            <input type="text" placeholder="Ejemplo: Lunes y Miércoles 8:00 AM">
+            <label>Grupo</label>
+            <input type="text" name="grupo" placeholder="Ejemplo: IS 203">
 
             <button type="submit">
                 Guardar materia
@@ -63,68 +63,7 @@
     <div class="materias-container">
 
         <h2>Lista de materias</h2>
-
-        <!-- MATERIA -->
-        <div class="materia-card">
-
-            <div>
-
-                <h3>Base de Datos</h3>
-
-                <p>
-                    Profesor: Juan Pérez
-                </p>
-
-                <p>
-                    Horario: Martes y Jueves 10:00 AM
-                </p>
-
-            </div>
-
-            <div class="acciones">
-
-                <button class="editar">
-                    Editar
-                </button>
-
-                <button class="eliminar">
-                    Eliminar
-                </button>
-
-            </div>
-
-        </div>
-
-        <!-- MATERIA -->
-        <div class="materia-card">
-
-            <div>
-
-                <h3>Programación Web</h3>
-
-                <p>
-                    Profesor: María López
-                </p>
-
-                <p>
-                    Horario: Viernes 2:00 PM
-                </p>
-
-            </div>
-
-            <div class="acciones">
-
-                <button class="editar">
-                    Editar
-                </button>
-
-                <button class="eliminar">
-                    Eliminar
-                </button>
-
-            </div>
-
-        </div>
+        <div id="listaMaterias"></div>
 
     </div>
 

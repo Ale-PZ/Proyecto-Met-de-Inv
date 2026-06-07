@@ -15,7 +15,7 @@
     <nav class="barranav" style="background-color: #d75674;">
 
         <a class="nombreapp" href="index.html">
-            TareasName
+            Tareas Escolares
         </a>
 
         <a class="navlink" href="index.html">
@@ -40,26 +40,28 @@
 
         <h2>Nueva tarea</h2>
 
-        <form>
+        <form id="formTarea">
 
             <label>Nombre de la tarea</label>
-            <input type="text" placeholder="Ingrese el nombre">
+            <input type="text" name="titulo" placeholder="Ingrese el nombre">
 
             <label>Descripción</label>
-            <textarea placeholder="Ingrese una descripción"></textarea>
+            <textarea name="descripcion" placeholder="Ingrese una descripción"></textarea>
 
             <label>Materia</label>
-            <input type="text" placeholder="Ingrese la materia">
+            <select name="id_materia" id="selectMaterias" required>
+                <option value="">Seleccione una materia</option>
+            </select>
 
             <label>Fecha de entrega</label>
-            <input type="date">
+            <input type="date" name="fecha_entrega" required>
 
             <label>Estado</label>
 
-            <select>
-                <option>Activa</option>
-                <option>Terminada</option>
-                <option>Atrasada</option>
+            <select name="estado">
+                <option value="Activa">Activa</option>
+                <option value="Terminada">Terminada</option>
+                <option value="Atrasada">Atrasada</option>
             </select>
 
             <button type="submit">
@@ -75,63 +77,7 @@
 
         <h2>Lista de tareas</h2>
 
-        <!-- TAREA -->
-        <div class="tarea-card">
-
-            <div>
-                <h3>Proyecto Base de Datos</h3>
-
-                <p>
-                    Entregar documentación final del proyecto.
-                </p>
-
-                <span class="estado activa">
-                    Activa
-                </span>
-            </div>
-
-            <div class="acciones">
-
-                <button class="editar">
-                    Editar
-                </button>
-
-                <button class="eliminar">
-                    Eliminar
-                </button>
-
-            </div>
-
-        </div>
-
-        <!-- TAREA -->
-        <div class="tarea-card">
-
-            <div>
-                <h3>Investigación UML</h3>
-
-                <p>
-                    Realizar diagramas de clases y secuencia.
-                </p>
-
-                <span class="estado atrasada">
-                    Atrasada
-                </span>
-            </div>
-
-            <div class="acciones">
-
-                <button class="editar">
-                    Editar
-                </button>
-
-                <button class="eliminar">
-                    Eliminar
-                </button>
-
-            </div>
-
-        </div>
+       <div id="listaTareas"></div>
 
     </div>
 
