@@ -400,3 +400,18 @@ function editarTarea(id_tarea, tituloActual, descripcionActual, fechaActual, est
         alert("Ocurrió un error al editar la tarea");
     });
 }
+
+/* ABRIR Y CERRAR MODAL */
+const modal = document.getElementById("modalFormulario");
+
+const abrirModal = document.getElementById("abrirModal");
+
+const cerrarModal = document.getElementById("cerrarModal");
+
+abrirModal.addEventListener("click", () => {
+    modal.classList.add("active");
+});
+
+cerrarModal.addEventListener("click", () => {
+    modal.classList.remove("active");
+});

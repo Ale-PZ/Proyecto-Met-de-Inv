@@ -35,41 +35,52 @@
     <!-- TITULO -->
     <h1>Mis Tareas</h1>
 
+    <!--BOTÓN PARA ABRIR FORMULARIO-->
+    <div class="abrir-form-container">
+        <button id="abrirModal" class="btn-abrir">
+            &#43; Nueva tarea
+        </button>
+    </div>
+
     <!-- FORMULARIO -->
-    <div class="form-container">
+    <div class="modal" id="modalFormulario">
 
-        <h2>Nueva tarea</h2>
+        <div class="form-container">
 
-        <form id="formTarea">
+            <button class="cerrar-modal" id="cerrarModal"> X </button>
 
-            <label>Nombre de la tarea</label>
-            <input type="text" name="titulo" placeholder="Ingrese el nombre">
+            <h2>Nueva tarea</h2>
 
-            <label>Descripción</label>
-            <textarea name="descripcion" placeholder="Ingrese una descripción"></textarea>
+            <form id="formTarea">
 
-            <label>Materia</label>
-            <select name="id_materia" id="selectMaterias" required>
-                <option value="">Seleccione una materia</option>
-            </select>
+                <label>Nombre de la tarea</label>
+                <input type="text" name="titulo" placeholder="Ingrese el nombre">
 
-            <label>Fecha de entrega</label>
-            <input type="date" name="fecha_entrega" required>
+                <label>Descripción</label>
+                <textarea name="descripcion" placeholder="Ingrese una descripción"></textarea>
 
-            <label>Estado</label>
+                <label>Materia</label>
+                <select name="id_materia" id="selectMaterias" required>
+                    <option value="">Seleccione una materia</option>
+                </select>
 
-            <select name="estado">
-                <option value="Activa">Activa</option>
-                <option value="Terminada">Terminada</option>
-                <option value="Atrasada">Atrasada</option>
-            </select>
+                <label>Fecha de entrega</label>
+                <input type="date" name="fecha_entrega" required>
 
-            <button type="submit">
-                Guardar tarea
-            </button>
+                <label>Estado</label>
 
-        </form>
+                <select name="estado">
+                    <option value="Activa">Activa</option>
+                    <option value="Terminada">Terminada</option>
+                    <option value="Atrasada">Atrasada</option>
+                </select>
 
+                <button type="submit">
+                    Guardar tarea
+                </button>
+
+            </form>
+        </div>
     </div>
 
     <!-- LISTA DE TAREAS -->

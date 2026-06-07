@@ -35,28 +35,36 @@
     <!-- TITULO -->
     <h1>Mis Materias</h1>
 
+    <!--BOTÓN PARA ABRIR FORMULARIO-->
+    <div class="abrir-form-container">
+        <button id="abrirModal" class="btn-abrir">
+            &#43; Nueva materia
+        </button>
+    </div>
+
     <!-- FORMULARIO -->
-    <div class="form-container">
+    <div class="modal" id="modalFormulario">
+        <div class="form-container">
+            <button class="cerrar-modal" id="cerrarModal"> X </button>
+            <h2>Nueva materia</h2>
 
-        <h2>Nueva materia</h2>
+            <form id="formMateria">
 
-        <form id="formMateria">
+                <label>Nombre de la materia</label>
+                <input type="text" name="nombre_materia" placeholder="Ingrese el nombre de la materia">
 
-            <label>Nombre de la materia</label>
-            <input type="text" name="nombre_materia" placeholder="Ingrese el nombre de la materia">
+                <label>Profesor</label>
+                <input type="text" name="profesor" placeholder="Ingrese el nombre del profesor">
 
-            <label>Profesor</label>
-            <input type="text" name="profesor" placeholder="Ingrese el nombre del profesor">
+                <label>Grupo</label>
+                <input type="text" name="grupo" placeholder="Ejemplo: IS 203">
 
-            <label>Grupo</label>
-            <input type="text" name="grupo" placeholder="Ejemplo: IS 203">
+                <button type="submit">
+                    Guardar materia
+                </button>
 
-            <button type="submit">
-                Guardar materia
-            </button>
-
-        </form>
-
+            </form>
+        </div>
     </div>
 
     <!-- LISTA DE MATERIAS -->

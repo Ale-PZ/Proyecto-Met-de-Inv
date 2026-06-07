@@ -110,6 +110,12 @@ a {
     margin-right: auto;
     font-weight: 800;
     letter-spacing: 0.3px;
+    background: transparent !important;
+    padding: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    cursor: default;
+    font-size: 24px;
 }
 
 nav, .barranav{
@@ -147,9 +153,8 @@ nav a, .barranav a{
 
 
 .nombreapp:hover {
-    background: transparent;
-    color: white;
-    transform: none;
+   background: transparent !important;
+    transform: none !important;
 }
 h1{
     width: min(1100px, 92%);
@@ -219,8 +224,8 @@ button {
 }
 form button [type="submit"]{
     margin-top: 10px;
-    background: linear-gradient(135deg, var(--color-principal), var(--color-principal-oscuro));
-    color: white;
+    background: linear-gradient(135deg, var(--color-principal), var(--color-principal-oscuro))!important;
+    color: white !important;
     box-shadow: 0 10px 22px rgba(215, 86, 116, 0.28);
 
 }
@@ -321,7 +326,57 @@ button:disabled {
     grid-template-columns: repeat(3, 1fr);
     gap: 22px;
 }
-/*FORMULARIO*/
+/*FORMULARIO Y BOTONES DE FORM*/
+.abrir-form-container{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 28px;
+}
+.modal{
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.45);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+    padding: 20px;
+}
+
+.modal.active{
+    display: flex;
+}
+
+.form-container{
+    position: relative;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.btn-abrir{
+    background: linear-gradient(135deg, var(--color-principal), var(--color-principal-oscuro));
+    color: white;
+    padding: 14px 22px;
+    border-radius: 14px;
+    border: none;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.btn-abrir:hover{
+    transform: translateY(-2px);
+}
+
+.cerrar-modal{
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: transparent;
+    color: var(--color-principal);
+    font-size: 24px;
+    border: none;
+    cursor: pointer;
+}
 .form-container,
 .tareas-container,
 .materias-container {
