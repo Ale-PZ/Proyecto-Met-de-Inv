@@ -215,7 +215,12 @@ function cargarTareas() {
                             </div>
 
                             <div class="acciones">
-                                <button class="editar">Editar</button>
+                                <button class="editar" onclick="editarTarea(
+                                ${tarea.id_tarea},
+                                '${tarea.titulo}',
+                                '${tarea.descripcion}',
+                                '${tarea.fecha_entrega}',
+                                '${tarea.estado}')">Editar</button>
                                 <button class="eliminar" onclick="eliminarTarea(${tarea.id_tarea})">Eliminar</button>
                             </div>
                         </div>
@@ -331,5 +336,47 @@ function editarMateria(id_materia, nombreActual, profesorActual, grupoActual) {
     .catch(error => {
         console.error("Error:", error);
         alert("Ocurrió un error al editar la materia");
+    });
+}
+
+/* EDITAR TAREA */
+
+function editarTarea(id_tarea, tituloActual, descripcionActual, fechaActual, estadoActual) {
+    const nuevoTitulo = prompt("Nuevo título de la tarea:", tituloActual);
+    const nuevaDescripcion = prompt("Nueva descripción:", descripcionActual);
+    const nuevaFecha = prompt("Nueva fecha de entrega (YYYY-MM-DD):", fechaActual);
+    const nuevoEstado = prompt("Nuevo estado (Activa, Terminada o Atrasada):", estadoActual);
+
+    if (nuevoTitulo === null || nuevaDescripcion === null || nuevaFecha === null || nuevoEstado === null) {
+        return;
+    }
+
+    if (nuevoTitulo.trim() === "" || nuevaFecha.trim() === "" || nuevoEstado.trim() === "") {
+        alert("Título, fecha y estado son obligatorios");
+        return;
+    }
+
+    const datos = new FormData();
+    datos.append("id_tarea", id_tarea);
+    datos.append("titulo", nuevoTitulo);
+    datos.append("descripcion", nuevaDescripcion);
+    datos.append("fecha_entrega", nuevaFecha);
+    datos.append("estado", nuevoEstado);
+
+    fetch("backend/editar_tarea.php", {
+        method: "POST",
+        body: datos
+    })
+    .then(response => response.json())
+    .then(data => {
+        alert(data.mensaje);
+
+        if (data.status === "success") {
+            cargarTareas();
+        }
+    })
+    .catch(error => {
+        console.error("Error:", error);
+        alert("Ocurrió un error al editar la tarea");
     });
 }
