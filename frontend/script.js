@@ -1,24 +1,44 @@
-/*CONTADORES DASHBOARD*/
+/* TABLERO INDEX */
 
-let tareasTotales = 10;
-let tareasActivas = 6;
-let tareasAtrasadas = 2;
+function cargarTablero() {
+    const total = document.getElementById("numTotal");
+    const activas = document.getElementById("numActivas");
+    const atrasadas = document.getElementById("numAtrasadas");
 
-const total = document.getElementById("numTotal");
-const activas = document.getElementById("numActivas");
-const atrasadas = document.getElementById("numAtrasadas");
+    const tarea1 = document.getElementById("Tarea1");
+    const tarea2 = document.getElementById("Tarea2");
 
-if(total){
-    total.textContent = tareasTotales;
+    if (!total || !activas || !atrasadas) {
+        return;
+    }
+
+    fetch("backend/tablero_inicio.php")
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === "success") {
+                total.textContent = data.total;
+                activas.textContent = data.activas;
+                atrasadas.textContent = data.atrasadas;
+
+                if (data.proximas.length > 0) {
+                    tarea1.textContent = `${data.proximas[0].titulo} - ${data.proximas[0].fecha_entrega}`;
+                } else {
+                    tarea1.textContent = "No hay tareas próximas";
+                }
+
+                if (data.proximas.length > 1) {
+                    tarea2.textContent = `${data.proximas[1].titulo} - ${data.proximas[1].fecha_entrega}`;
+                } else {
+                    tarea2.textContent = "";
+                }
+            }
+        })
+        .catch(error => {
+            console.error("Error al cargar el tablero de inicio:", error);
+        });
 }
 
-if(activas){
-    activas.textContent = tareasActivas;
-}
-
-if(atrasadas){
-    atrasadas.textContent = tareasAtrasadas;
-}
+cargarTablero();
 
 
 /*AGREGAR MATERIA CONECTADO YA CON BASE*/
