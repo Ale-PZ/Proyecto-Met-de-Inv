@@ -16,7 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit;
     }
 
-    $sql = "CALL sp_registrar_materia(?, ?, ?)";
+    $sql = "INSERT INTO materia(nombre_materia, profesor, grupo) VALUES(?, ?, ?)";
     $stmt = $conexion->prepare($sql);
 
     if (!$stmt) {

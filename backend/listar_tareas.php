@@ -2,7 +2,17 @@
 header("Content-Type: application/json");
 include "conexion.php";
 
-$sql = "CALL sp_listar_tareas()";
+$sql = "SELECT 
+            tarea.id_tarea,
+            tarea.titulo,
+            tarea.descripcion,
+            tarea.fecha_entrega,
+            tarea.estado,
+            materia.nombre_materia
+        FROM tarea
+        INNER JOIN materia 
+        ON tarea.id_materia = materia.id_materia
+        ORDER BY tarea.id_tarea DESC";
 $resultado = $conexion->query($sql);
 
 $tareas = [];

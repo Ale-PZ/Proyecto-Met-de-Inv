@@ -13,10 +13,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         ]);
         exit;
     }
+    $sql_verificar = "SELECT COUNT(*) AS total FROM tarea WHERE id_materia = ?";
+    $stmt_verificar = $conexion->prepare($sql_verificar);
+    $stmt_verificar->bind_param("i", $id_materia);
+    $stmt_verificar->execute();
+    $resultado = $stmt_verificar->get_result();
+    $fila = $resultado->fetch_assoc();
 
-    $sql = "CALL sp_eliminar_materia(?)";
+    if ($fila["total"] > 0) {
+        echo json_encode([
+            "status" => "error",
+            "mensaje" => "No se puede borrar la materia porque aún hay tareas en proceso"
+        ]);
+        exit;
+    }
+
+    $sql = "DELETE FROM materia WHERE id_materia = ?";
     $stmt = $conexion->prepare($sql);
-
+    
     if (!$stmt) {
         echo json_encode([
             "status" => "error",

@@ -2,7 +2,9 @@
 header("Content-Type: application/json");
 include "conexion.php";
 
-$sql = "CALL sp_listar_materias()";
+$sql = "SELECT id_materia, nombre_materia, profesor, grupo 
+        FROM materia 
+        ORDER BY id_materia DESC";
 $resultado = $conexion->query($sql);
 
 $materias = [];

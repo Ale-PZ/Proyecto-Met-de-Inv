@@ -14,7 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit;
     }
 
-    $sql = "CALL sp_eliminar_tarea(?)";
+    $sql = "DELETE FROM tarea WHERE id_tarea = ?";
     $stmt = $conexion->prepare($sql);
 
     if (!$stmt) {

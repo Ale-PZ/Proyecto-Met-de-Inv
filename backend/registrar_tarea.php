@@ -18,7 +18,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit;
     }
 
-    $sql = "CALL sp_registrar_tarea(?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO tarea(titulo, descripcion, fecha_entrega, estado, id_materia)
+            VALUES (?, ?, ?, ?, ?)";
     $stmt = $conexion->prepare($sql);
 
     if (!$stmt) {
